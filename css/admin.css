@@ -1,0 +1,913 @@
+/* === DESIGN TOKENS: Shared dashboard colors, panels, shadows, and dimensions. === */
+:root {
+  --admin-bg: #f3f7ff;
+  --panel: #ffffff;
+  --panel-soft: #f5f9ff;
+  --navy: #183153;
+  --navy-soft: #23487a;
+  --text: #1d2e45;
+  --muted: #58708d;
+  --line: #dfeaf8;
+  --blue: #2563eb;
+  --green: #1d9d72;
+  --purple: #6f5ad9;
+  --orange: #f59e0b;
+  --accent: #2563eb;
+  --accent-dark: #1e4fc2;
+  --shadow: 0 18px 32px rgba(24, 49, 83, 0.08);
+  --radius-lg: 24px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+}
+
+/* === GLOBAL RESET: Normalize sizing and form typography for the staff interface. === */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Source Sans 3", sans-serif;
+  color: var(--text);
+  background: var(--admin-bg);
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.admin-body {
+  min-height: 100vh;
+}
+
+/* === LOGIN STYLES: Center and style the staff authentication form. === */
+.admin-login-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #f4efe9 0%, #eef2f7 100%);
+  padding: 32px 18px;
+}
+
+.login-card {
+  width: min(500px, 100%);
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  box-shadow: var(--shadow);
+  padding: 30px 28px;
+}
+
+.back-link {
+  border: none;
+  background: transparent;
+  color: var(--navy);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  margin-bottom: 18px;
+}
+
+.login-header h1 {
+  margin: 10px 0 8px;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  color: var(--navy);
+  letter-spacing: -0.04em;
+}
+
+.login-header p {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+.small-label {
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.field-group {
+  margin-bottom: 18px;
+}
+
+.field-group label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.field-group input,
+.field-group select,
+.search-box input,
+.report-controls select,
+.custom-date-group input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--text);
+  outline: none;
+}
+
+.field-group input:focus,
+.field-group select:focus,
+.search-box input:focus,
+.report-controls select:focus,
+.custom-date-group input:focus {
+  border-color: rgba(222, 107, 94, 0.65);
+  box-shadow: 0 0 0 4px rgba(222, 107, 94, 0.08);
+}
+
+.primary-btn,
+.secondary-btn,
+.text-link,
+.pagination-controls button {
+  font: inherit;
+}
+
+.primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 22px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primary-btn:hover,
+.primary-btn:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(222, 107, 94, 0.18);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.login-error {
+  min-height: 22px;
+  margin: 0 0 12px;
+  color: #c63f3f;
+  font-size: 0.94rem;
+}
+
+/* === DASHBOARD SHELL: Define the sidebar and main content layout. === */
+.dashboard-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  width: 270px;
+  min-height: 100vh;
+  background: var(--navy);
+  color: #f7f8fa;
+  display: flex;
+  flex-direction: column;
+  padding: 26px 18px 22px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 10px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.sidebar-brand p {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.sidebar-brand span {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sidebar-nav,
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-nav {
+  margin-top: 24px;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 13px 14px;
+  text-align: left;
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-item:hover,
+.nav-item:focus-visible {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-item.active {
+  background: rgba(37, 99, 235, 0.18);
+  color: #fff;
+}
+
+.content-panel {
+  flex: 1;
+  min-width: 0;
+  padding: 26px 28px 48px;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 8px 4px 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-small-label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.admin-header h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--navy);
+  line-height: 1.2;
+  font-family: "Playfair Display", serif;
+}
+
+.header-date {
+  color: var(--muted);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.admin-main {
+  padding-top: 28px;
+}
+
+.admin-section {
+  display: none;
+}
+
+.admin-section.active {
+  display: block;
+}
+
+/* === DASHBOARD CONTENT: Style statistic cards, charts, program breakdown panels, and suggestions. === */
+.suggestions-list {
+  display: grid;
+  gap: 16px;
+}
+
+.suggestion-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: 0 6px 18px rgba(28, 33, 42, 0.02);
+}
+
+.suggestion-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.suggestion-card strong {
+  color: var(--navy);
+}
+
+.suggestion-message {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.empty-state {
+  background: var(--panel);
+  border: 1px dashed var(--line);
+  border-radius: 16px;
+  padding: 26px 18px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 22px 18px;
+  box-shadow: 0 6px 18px rgba(28, 33, 42, 0.02);
+}
+
+.stat-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+}
+
+.stat-card.blue .stat-icon { background: rgba(63, 115, 217, 0.1); color: var(--blue); }
+.stat-card.green .stat-icon { background: rgba(44, 157, 101, 0.1); color: var(--green); }
+.stat-card.purple .stat-icon { background: rgba(123, 92, 200, 0.1); color: var(--purple); }
+.stat-card.orange .stat-icon { background: rgba(234, 147, 63, 0.1); color: var(--orange); }
+
+.stat-copy {
+  min-width: 0;
+}
+
+.stat-copy span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-bottom: 4px;
+}
+
+.stat-copy strong {
+  display: block;
+  color: var(--navy);
+  font-size: clamp(1.8rem, 2vw, 2.3rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.stat-copy small {
+  color: var(--muted);
+}
+
+.card-grid {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: 1.5fr 0.9fr;
+  gap: 20px;
+}
+
+.content-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 22px 20px;
+  min-height: 300px;
+}
+
+.card-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.card-header-row h3,
+.section-header-row h3 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 1.65rem;
+  line-height: 1.2;
+}
+
+.card-header-row p,
+.section-header-row p {
+  margin: 5px 0 0;
+  color: var(--muted);
+}
+
+.text-link {
+  border: none;
+  background: transparent;
+  color: var(--navy);
+  font-weight: 700;
+  padding: 0;
+}
+
+.chart {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+  height: 220px;
+  padding-top: 12px;
+}
+
+.chart-bar-group {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+.chart-bar {
+  width: 100%;
+  max-width: 52px;
+  min-height: 18px;
+  background: linear-gradient(180deg, #4f8bf5 0%, #2f5ecf 100%);
+  border-radius: 16px 16px 8px 8px;
+  animation: loadBar 0.7s ease both;
+}
+
+@keyframes loadBar {
+  from { transform: scaleY(0); opacity: 0.2; } to { transform: scaleY(1); opacity: 1; }
+}
+
+.chart-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.chart-value {
+  font-size: 0.76rem;
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.program-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.program-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  color: var(--navy);
+}
+
+.program-name {
+  flex: 1;
+  font-weight: 600;
+}
+
+.program-bar {
+  flex: 1;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(63, 115, 217, 0.12);
+  overflow: hidden;
+  min-width: 100px;
+}
+
+.program-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #3f73d9 0%, #7b5cc8 100%);
+}
+
+.program-total {
+  font-weight: 700;
+  min-width: 28px;
+  text-align: right;
+}
+
+/* === LOG TABLES AND FILTERS: Style search controls, records, pills, and pagination. === */
+.section-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.small-btn {
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.filter-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  padding: 0 14px;
+}
+
+.search-box i {
+  color: var(--muted);
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  padding-left: 0;
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+
+thead th {
+  text-align: left;
+  padding: 16px 18px;
+  color: var(--muted);
+  background: #faf8f6;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+tbody td {
+  padding: 16px 18px;
+  border-top: 1px solid var(--line);
+  color: var(--text);
+}
+
+tbody tr:hover {
+  background: rgba(63, 115, 217, 0.02);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 7px 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.pill.study {
+  background: rgba(44, 157, 101, 0.12);
+  color: var(--green);
+}
+
+.pill.borrow {
+  background: rgba(234, 147, 63, 0.12);
+  color: var(--orange);
+}
+
+.pagination-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 18px;
+  color: var(--muted);
+  flex-wrap: wrap;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pagination-controls button {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--navy);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-weight: 700;
+}
+
+.page-numbers {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-number {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 10px;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 10px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.page-number.active {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+
+/* === REPORTS AND PROFILE: Style report controls, summary cards, and profile content. === */
+.report-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.report-controls select {
+  max-width: 260px;
+}
+
+.custom-date-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.report-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.profile-card {
+  max-width: 500px;
+  margin: 0 auto;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.profile-avatar {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #1e4fc2);
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.profile-card h3 {
+  margin: 0 0 8px;
+  font-family: "Playfair Display", serif;
+  color: var(--navy);
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
+}
+
+.profile-card a {
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+.profile-role {
+  margin-top: 16px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(44, 157, 101, 0.12);
+  color: var(--green);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.library-hours-panel {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  text-align: left;
+}
+
+.library-hours-panel h4 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 1.25rem;
+}
+
+.library-hours-panel p {
+  margin: 6px 0 16px;
+  color: var(--muted);
+}
+
+.library-hours-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.library-hours-fields label {
+  display: grid;
+  gap: 7px;
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.library-hours-fields input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--text);
+  background: #fff;
+}
+
+.library-hours-panel .primary-btn {
+  width: 100%;
+}
+
+.library-hours-message {
+  min-height: 22px;
+  margin-bottom: 0 !important;
+  font-size: 0.9rem;
+}
+
+/* === RESPONSIVE DASHBOARD: Collapse the sidebar and grids for tablet and mobile screens. === */
+.mobile-sidebar-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+}
+
+@media (max-width: 980px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .report-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .dashboard-shell {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    z-index: 120;
+    width: min(82vw, 300px);
+    transition: left 0.25s ease;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .mobile-sidebar-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .admin-header {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .filter-row {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .content-panel {
+    padding: 22px 16px 28px;
+  }
+
+  .section-header-row,
+  .pagination-row,
+  .report-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .custom-date-group {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .custom-date-group input {
+    width: 100%;
+  }
+
+  .library-hours-fields {
+    grid-template-columns: 1fr;
+  }
+}
